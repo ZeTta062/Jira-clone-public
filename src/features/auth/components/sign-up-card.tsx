@@ -11,16 +11,15 @@ import { DottedSeparator } from "@/components/dotted-separator"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form"
 
+import { registerSchema } from "../schemas"
+import { useRegister } from "../api/use-register"
 
-const formSchema = z.object({
-    name: z.string().trim().min(1, "이름을 입력해주세요."),
-    email: z.string().trim().toLowerCase().min(1,"이메일 주소를 입력해주세요.").email("올바른 이메일 주소를 입력해주세요."),
-    password: z.string().min(8, "최소 8글자 이상의 비밀번호를 입력해주세요."),
-})
 
 export const SignUpCard = () => {
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
+    const { mutate } = useRegister();
+
+    const form = useForm<z.infer<typeof registerSchema>>({
+        resolver: zodResolver(registerSchema),
         defaultValues: {
             name: "",
             email: "",
@@ -28,9 +27,9 @@ export const SignUpCard = () => {
         }
     })
 
-    const onSubmit = (values: z.infer<typeof formSchema>) => {
-        console.log ({ values });
-    }
+    const onSubmit = (values: z.infer<typeof registerSchema>) => {
+        mutate({ json: values });
+    };
 
     return (
         <Card className="w-full h-full md:w-[487px] border-none shadow-none">

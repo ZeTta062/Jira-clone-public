@@ -11,23 +11,25 @@ import { DottedSeparator } from "@/components/dotted-separator"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form"
 
+import { loginSchema } from "../schemas"
+import { useLogin } from "../api/use-login"
 
-const formSchema = z.object({
-    email: z.string().trim().toLowerCase().min(1,"이메일 주소를 입력해주세요.").email("올바른 이메일 주소를 입력해주세요."),
-    password: z.string().min(1, "비밀번호를 입력해주세요."),
-})
 
 export const SignInCard = () => {
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
+    const { mutate } = useLogin();
+
+    const form = useForm<z.infer<typeof loginSchema>>({
+        resolver: zodResolver(loginSchema),
         defaultValues: {
             email: "",
             password: "",
         }
     })
 
-    const onSubmit = (values: z.infer<typeof formSchema>) => {
-        console.log ({ values });
+    const onSubmit = (values: z.infer<typeof loginSchema>) => {
+        mutate({
+            json: values,
+        });
     }
 
     return (
