@@ -9,3 +9,5 @@
 - npm i hono@latest
 - npm i @tanstack/react-query@latest
 - npm i @hono/zod-validator
+- npm i node-appwrite@latest
+- npm i server-only
