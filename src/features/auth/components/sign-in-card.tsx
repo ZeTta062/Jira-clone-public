@@ -1,3 +1,5 @@
+"use client";
+
 import { z } from "zod"
 import Link from "next/link"
 import { FcGoogle } from "react-icons/fc"
@@ -16,7 +18,7 @@ import { useLogin } from "../api/use-login"
 
 
 export const SignInCard = () => {
-    const { mutate } = useLogin();
+    const { mutate, isPending } = useLogin();
 
     const form = useForm<z.infer<typeof loginSchema>>({
         resolver: zodResolver(loginSchema),
@@ -77,7 +79,7 @@ export const SignInCard = () => {
                                 </FormItem>
                             )}
                         />
-                        <Button disabled={false} size={"lg"} className="w-full">
+                        <Button disabled={isPending} size={"lg"} className="w-full">
                             로그인
                         </Button>
                     </form>
@@ -91,7 +93,7 @@ export const SignInCard = () => {
                     variant={"secondary"}
                     size={"lg"}
                     className="w-full"
-                    disabled={false}
+                    disabled={isPending}
                 >
                     <FcGoogle className="mr-2 size-5" />
                     구글로 로그인
@@ -100,7 +102,7 @@ export const SignInCard = () => {
                     variant={"secondary"}
                     size={"lg"}
                     className="w-full"
-                    disabled={false}
+                    disabled={isPending}
                 >
                     <FaGithub className="mr-2 size-5" />
                     깃허브로 로그인
