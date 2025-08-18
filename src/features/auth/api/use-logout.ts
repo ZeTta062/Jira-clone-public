@@ -1,3 +1,4 @@
+import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
 import { InferResponseType } from "hono";
@@ -18,11 +19,20 @@ export const useLogout = () => {
     >({
         mutationFn: async () => {
             const response = await client.api.auth.logout["$post"]();
+
+            if (!response.ok) {
+                throw new Error("Failed to Logout");
+            }
+
             return await response.json();
         },
         onSuccess: () => {
+            toast.success("로그아웃에 성공하였습니다.")
             router.refresh();
             queryClient.invalidateQueries({ queryKey: ["current"] });
+        },
+        onError: () => {
+            toast.error("로그아웃에 실패하였습니다.")
         }
     });
 

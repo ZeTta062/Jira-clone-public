@@ -1,3 +1,4 @@
+import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { InferRequestType, InferResponseType } from "hono";
@@ -18,11 +19,20 @@ export const useRegister = () => {
     >({
         mutationFn: async ({ json }) => {
             const response = await client.api.auth.register["$post"]({ json });
+
+            if (!response.ok) {
+                throw new Error("Failed to register");
+            }
+
             return await response.json();
         },
         onSuccess: () => {
+            toast.success("계정 생성 완료");
             router.refresh();
             queryClient.invalidateQueries({ queryKey: ["current"] });
+        },
+        onError: () => {
+            toast.error("계정생성에 실패하였습니다.");
         }
     });
 
