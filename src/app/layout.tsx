@@ -4,8 +4,9 @@ import { Noto_Sans_KR } from "next/font/google";
 import { cn } from "@/lib/utils";
 
 import "./globals.css";
-import QueryProvider from "@/components/query-provider";
 import { Toaster } from "@/components/ui/sonner";
+import { NuqsAdapter } from 'nuqs/adapters/next/app'
+import QueryProvider from "@/components/query-provider";
 
 const NotoSansKR = Noto_Sans_KR({subsets: ["latin"] })
 
@@ -26,7 +27,9 @@ export default function RootLayout({
             >
                 <QueryProvider>
                     <Toaster />
-                    {children}
+                    <NuqsAdapter>
+                      {children}
+                    </NuqsAdapter>
                 </QueryProvider>
             </body>
         </html>

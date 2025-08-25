@@ -5,6 +5,7 @@ import { useRef } from "react";
 import Image from "next/image";
 import { ImageIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Input } from "@/components/ui/input";
@@ -22,6 +23,7 @@ interface CreateWorkspaceFormPros {
 };
 
 export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormPros) => {
+    const router = useRouter();
     const { mutate, isPending } = useCreateWorkspace();
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -39,9 +41,9 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormPros) => {
         };
 
         mutate({ form: finalValues }, {
-            onSuccess: () => {
+            onSuccess: ({ data }) => {
                 form.reset();
-                // Todo:  새로운 워크스페이스에 리다이렉트하기
+                router.push(`/workspaces/${data.$id}`);
             }
         });
     };
