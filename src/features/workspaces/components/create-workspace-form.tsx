@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -150,6 +151,7 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormPros) => {
                                 size={"lg"}
                                 onClick={onCancel}
                                 disabled={isPending}
+                                className={cn(!onCancel && "invisible")}
                             >
                                 취소
                             </Button>
