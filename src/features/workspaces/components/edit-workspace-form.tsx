@@ -263,7 +263,7 @@ export const EditWorkspaceForm = ({ onCancel, initialValues }: EditWorkspaceForm
 					<div className="flex flex-col">
 						<h3 className="font-bold">팀 초대</h3>
 						<p className="text-sm text-muted-foreground">
-                            초대 링크를 사용하여 워크 스페이스에 팀원을 추가합니다.
+                            초대 링크를 사용하여 워크스페이스에 팀원을 추가합니다.
 						</p>
                         <div className="mt-4">
                             <div className="flex items-center gap-x-2">
