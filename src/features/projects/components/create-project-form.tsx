@@ -13,38 +13,45 @@ import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { DottedSeparator } from "@/components/dotted-separator";
+import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 
-import { createWorkspaceSchema } from "../schemas";
-import { useCreateWorkspace } from "../api/use-create-workspace";
+import { createProjectSchema } from "../schemas";
+import { useCreateProject } from "../api/use-create-project";
 
-interface CreateWorkspaceFormPros {
+
+interface CreateProjectFormPros {
     onCancel?: () => void;
 };
 
-export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormPros) => {
+const formSchema = createProjectSchema.omit({ workspaceId: true });
+type FormValues = z.infer<typeof formSchema>;
+
+export const CreateProjectForm = ({ onCancel }: CreateProjectFormPros) => {
+    const workspaceId = useWorkspaceId();
     const router = useRouter();
-    const { mutate, isPending } = useCreateWorkspace();
+    const { mutate, isPending } = useCreateProject();
     const inputRef = useRef<HTMLInputElement>(null);
 
-    const form = useForm<z.infer<typeof createWorkspaceSchema>>({
-        resolver: zodResolver(createWorkspaceSchema),
+    const form = useForm<FormValues>({
+        resolver: zodResolver(createProjectSchema.omit({ workspaceId: true })),
         defaultValues: {
             name: "",
         }
     });
 
-    const onSubmit = (values: z.infer<typeof createWorkspaceSchema>) => {
+    const onSubmit = (values: FormValues) => {
         const finalValues = {
-            ...values,
-            image: values.image instanceof File ? values.image : "",
-        };
+                ...values,
+                image: values.image instanceof File ? values.image : "",
+                workspaceId,
+            };
 
         mutate({ form: finalValues }, {
             onSuccess: ({ data }) => {
                 form.reset();
-                router.push(`/workspaces/${data.$id}`);
+                // Todo: Redirect to project screen
             }
         });
     };
@@ -60,7 +67,7 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormPros) => {
         <Card className="w-full h-full border-none shadow-none">
             <CardHeader className="flex p-7">
                 <CardTitle className="text-xl font-bold">
-                    새 워크스페이스 만들기
+                    새 프로젝트 만들기
                 </CardTitle>
             </CardHeader>
             <div className="px-7">
@@ -76,12 +83,12 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormPros) => {
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>
-                                            워크스페이스 이름
+                                            프로젝트 이름
                                         </FormLabel>
                                         <FormControl>
                                             <Input
                                                 {...field}
-                                                placeholder="워크스페이스 이름을 입력하세요."
+                                                placeholder="프로젝트 이름을 입력하세요."
                                             />
                                         </FormControl>
                                         <FormMessage />
@@ -115,7 +122,7 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormPros) => {
                                                 </Avatar>
                                             )}
                                             <div className="flex flex-col">
-                                                <p className="text-sm">워크스페이스 아이콘</p>
+                                                <p className="text-sm">프로젝트 아이콘</p>
                                                 <p className="text-sm text-muted-foreground">
                                                     JPG, PNG, SVG 또는 JPEG | 최대 1mb
                                                 </p>
@@ -178,7 +185,7 @@ export const CreateWorkspaceForm = ({ onCancel }: CreateWorkspaceFormPros) => {
                                 size={"lg"}
                                 disabled={isPending}
                             >
-                                워크스페이스 만들기
+                                프로젝트 만들기
                             </Button>
                         </div>
                     </form>
