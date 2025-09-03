@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 
-import { getCurrent } from "@/features/auth/quries";
-import { getWorkspaceInfo } from "@/features/workspaces/quries";
+import { getCurrent } from "@/features/auth/queries";
+import { getWorkspaceInfo } from "@/features/workspaces/queries";
 import { JoinWorkspaceForm } from "@/features/workspaces/components/join-workspace-form";
 
 
