@@ -12,8 +12,8 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 
 
 interface DatePickerProps {
-    value: Date;
-    onChange: (date: Date) => void;
+    value?: Date;
+    onChange: (date?: Date) => void;
     className?: string;
     placeholder?: string;
 }
