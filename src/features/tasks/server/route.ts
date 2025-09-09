@@ -9,7 +9,7 @@ import { sessionMiddleware } from "@/lib/session-middleware";
 import { Project } from "@/features/projects/types";
 import { getMember } from "@/features/members/utils";
 
-import { TaskStatus } from "../types";
+import { Task, TaskStatus } from "../types";
 import { createTaskSchema } from "../schemas";
 
 const app = new Hono()
@@ -80,7 +80,7 @@ const app = new Hono()
                 query.push(Query.search("name", search))
             }
 
-            const tasks = await databases.listDocuments(
+            const tasks = await databases.listDocuments<Task>(
                 DATABASE_ID,
                 TASKS_ID,
                 query,
@@ -93,13 +93,13 @@ const app = new Hono()
                 DATABASE_ID,
                 PROJECTS_ID,
                 projectIds.length > 0 ? [Query.contains("$id", projectIds)] : []
-            )
+            );
 
             const members = await databases.listDocuments(
                 DATABASE_ID,
                 MEMBERS_ID,
                 assigneeIds.length > 0 ? [Query.contains("$id", assigneeIds)] : []
-            )
+            );
 
             const assignees = await Promise.all(
                 members.documents.map( async (member) => {

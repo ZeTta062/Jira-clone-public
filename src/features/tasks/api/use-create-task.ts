@@ -25,11 +25,11 @@ export const useCreateTask = () => {
             return await response.json();
         },
         onSuccess: () => {
-            toast.success("과제를 만들었습니다.");
+            toast.success("작업을 만들었습니다.");
             queryClient.invalidateQueries({ queryKey: ["tasks"] });
         },
         onError: () => {
-            toast.error("과제를 만드는데 실패하였습니다.")
+            toast.error("작업을 만드는데 실패하였습니다.")
         }
     });
 

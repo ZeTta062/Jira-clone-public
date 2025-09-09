@@ -59,7 +59,7 @@ export const CreateTaskForm = ({ onCancel, projectOptions, memberOptions }: Crea
         <Card className="w-full h-full border-none shadow-none">
             <CardHeader className="flex p-7">
                 <CardTitle className="text-xl font-bold">
-                    새 과제 만들기
+                    새 작업 만들기
                 </CardTitle>
             </CardHeader>
             <div className="px-7">
@@ -75,12 +75,12 @@ export const CreateTaskForm = ({ onCancel, projectOptions, memberOptions }: Crea
                                 render={({ field }) => (
                                     <FormItem>
                                         <FormLabel>
-                                            과제 이름
+                                            작업 이름
                                         </FormLabel>
                                         <FormControl>
                                             <Input
                                                 {...field}
-                                                placeholder="과제 이름을 입력하세요."
+                                                placeholder="작업 이름을 입력하세요."
                                             />
                                         </FormControl>
                                         <FormMessage />
@@ -237,7 +237,7 @@ export const CreateTaskForm = ({ onCancel, projectOptions, memberOptions }: Crea
                                 size={"lg"}
                                 disabled={isPending}
                             >
-                                과제 만들기
+                                작업 만들기
                             </Button>
                         </div>
                     </form>

@@ -52,7 +52,7 @@ export const JoinWorkspaceForm = ({
                     <WorkspaceAvatar 
                         name={initialValues.name}
                         image={initialValues.imageUrl}
-                        className="size-15 border border-black"
+                        className="size-15"
                     />
                     <div className="flex flex-col">
                     <p className="text-lg font-semibold">{initialValues.name}</p>

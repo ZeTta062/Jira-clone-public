@@ -6,7 +6,7 @@ import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 
 import DatePicker from "@/components/date-picker";
 import { Select, SelectContent, SelectItem, SelectSeparator, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { TaskStatus } from "../types";
+import { STATUS_KO, TaskStatus } from "../types";
 import { useTaskFilters } from "../hooks/use-task-filters";
 
 
@@ -69,11 +69,11 @@ export const DataFilter = ({ hideProjectFilter }: DataFiltersProps) => {
                 <SelectContent>
                     <SelectItem value="all"> 모든 상태</SelectItem>
                     <SelectSeparator /> 
-                    <SelectItem value={TaskStatus.BACKLOG}> 대기 중</SelectItem>
-                    <SelectItem value={TaskStatus.IN_PROGRESS}> 진행 중</SelectItem>
-                    <SelectItem value={TaskStatus.IN_REVIEW}> 검토 중</SelectItem>
-                    <SelectItem value={TaskStatus.TODO}> 해야할 일</SelectItem>
-                    <SelectItem value={TaskStatus.DONE}> 완료</SelectItem>
+                    <SelectItem value={TaskStatus.BACKLOG}> {STATUS_KO.BACKLOG}</SelectItem>
+                    <SelectItem value={TaskStatus.IN_PROGRESS}> {STATUS_KO.IN_PROGRESS}</SelectItem>
+                    <SelectItem value={TaskStatus.IN_REVIEW}> {STATUS_KO.IN_REVIEW}</SelectItem>
+                    <SelectItem value={TaskStatus.TODO}> {STATUS_KO.TODO}</SelectItem>
+                    <SelectItem value={TaskStatus.DONE}> {STATUS_KO.DONE}</SelectItem>
                 </SelectContent>
             </Select>
 
