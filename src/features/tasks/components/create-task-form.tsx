@@ -17,7 +17,7 @@ import { MemberAvatar } from "@/features/members/components/member-avatar";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 
-import { TaskStatus } from "../types";
+import { STATUS_KO, TaskStatus } from "../types";
 import { createTaskSchema } from "../schemas";
 import { useCreateTask } from "../api/use-create-task";
 
@@ -163,19 +163,19 @@ export const CreateTaskForm = ({ onCancel, projectOptions, memberOptions }: Crea
                                             <FormMessage />
                                             <SelectContent>
                                                 <SelectItem value={TaskStatus.BACKLOG}>
-                                                    대기 중
-                                                </SelectItem>
-                                                <SelectItem value={TaskStatus.IN_PROGRESS}>
-                                                    진행 중
-                                                </SelectItem>
-                                                <SelectItem value={TaskStatus.IN_REVIEW}>
-                                                    검토 중
+                                                    {STATUS_KO.BACKLOG}
                                                 </SelectItem>
                                                 <SelectItem value={TaskStatus.TODO}>
-                                                    해야할 일
+                                                    {STATUS_KO.TODO}
+                                                </SelectItem>
+                                                <SelectItem value={TaskStatus.IN_PROGRESS}>
+                                                    {STATUS_KO.IN_PROGRESS}
+                                                </SelectItem>
+                                                <SelectItem value={TaskStatus.IN_REVIEW}>
+                                                    {STATUS_KO.IN_REVIEW}
                                                 </SelectItem>
                                                 <SelectItem value={TaskStatus.DONE}>
-                                                    완료
+                                                    {STATUS_KO.DONE}
                                                 </SelectItem>
                                             </SelectContent>
                                         </Select>

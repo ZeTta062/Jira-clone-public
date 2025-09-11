@@ -70,9 +70,9 @@ export const DataFilter = ({ hideProjectFilter }: DataFiltersProps) => {
                     <SelectItem value="all"> 모든 상태</SelectItem>
                     <SelectSeparator /> 
                     <SelectItem value={TaskStatus.BACKLOG}> {STATUS_KO.BACKLOG}</SelectItem>
+                    <SelectItem value={TaskStatus.TODO}> {STATUS_KO.TODO}</SelectItem>
                     <SelectItem value={TaskStatus.IN_PROGRESS}> {STATUS_KO.IN_PROGRESS}</SelectItem>
                     <SelectItem value={TaskStatus.IN_REVIEW}> {STATUS_KO.IN_REVIEW}</SelectItem>
-                    <SelectItem value={TaskStatus.TODO}> {STATUS_KO.TODO}</SelectItem>
                     <SelectItem value={TaskStatus.DONE}> {STATUS_KO.DONE}</SelectItem>
                 </SelectContent>
             </Select>

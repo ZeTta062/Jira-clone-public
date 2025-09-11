@@ -15,6 +15,7 @@
 - npm i react-use
 - npm i nuqs
 - npm i date-fns
+- npm i @hello-pangea/dnd
 
 ## 수정해야할 점
 - appwrite는 Image transformations를 free tier에서 제공하지 않음.
