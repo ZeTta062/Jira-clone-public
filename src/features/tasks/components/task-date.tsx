@@ -17,10 +17,12 @@ const TaskDate = ({
     const diffInDays = differenceInDays(endDate, today);
 
     let textColor = "text-muted-foreground";
-    if (diffInDays <= 3) {
+    if (diffInDays < 0) {
+        textColor = "text-neutral-400";
+    } else if (diffInDays <= 3) {
         textColor = "text-red-500 font-bold";
     } else if (diffInDays <= 7) {
-        textColor = "text-orange-500";
+        textColor = "text-orange-500 font-bold";
     } else if (diffInDays <= 14) {
         textColor = "text-yellow-500";
     }
