@@ -16,6 +16,8 @@
 - npm i nuqs
 - npm i date-fns
 - npm i @hello-pangea/dnd
+- npm i react-big-calendar
+- npm i -D @types/react-big-calendar
 
 ## 수정해야할 점
 - appwrite는 Image transformations를 free tier에서 제공하지 않음.

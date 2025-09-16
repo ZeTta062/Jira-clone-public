@@ -10,15 +10,16 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 import { useGetTasks } from "../api/use-get-tasks"
 import { useTaskFilters } from "../hooks/use-task-filters"
+import { useBulkUpdateTasks } from "../api/use-bulk-update-tasks"
 import { useCreateTaskModal } from "../hooks/use-create-task-modal"
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id"
 
+import { TaskStatus } from "../types"
 import { columns } from "./columns"
 import { DataFilter } from "./data-filter"
 import { DataTable } from "./data-table"
 import DataKanban from "./data-kanban"
-import { TaskStatus } from "../types"
-import { useBulkUpdateTasks } from "../api/use-bulk-update-tasks"
+import { DataCalendar } from "./data-calendar"
 
 
 export const TaskViewSwitcher = () => {
@@ -108,8 +109,8 @@ export const TaskViewSwitcher = () => {
                         <TabsContent value="kanban" className="mt-0">
                             <DataKanban onChange={onKanbanChange} data={tasks?.documents ?? []} />
                         </TabsContent>
-                        <TabsContent value="calendar" className="mt-0">
-                            {JSON.stringify(tasks)}
+                        <TabsContent value="calendar" className="mt-0 h-full pb-4">
+                            <DataCalendar data={tasks?.documents ?? []} />
                         </TabsContent>
                     </>
                 )}
