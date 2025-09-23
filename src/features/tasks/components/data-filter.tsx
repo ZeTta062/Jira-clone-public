@@ -6,6 +6,7 @@ import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 
 import DatePicker from "@/components/date-picker";
 import { Select, SelectContent, SelectItem, SelectSeparator, SelectTrigger, SelectValue } from "@/components/ui/select";
+
 import { STATUS_KO, TaskStatus } from "../types";
 import { useTaskFilters } from "../hooks/use-task-filters";
 
@@ -98,26 +99,28 @@ export const DataFilter = ({ hideProjectFilter }: DataFiltersProps) => {
                 </SelectContent>
             </Select>
 
-            <Select
-                defaultValue={projectId ?? undefined}
-                onValueChange={(value) => onProjectChange(value)}
-            >
-                <SelectTrigger className="w-full lg:w-auto h-8">
-                    <div className="flex items-center pr-2">
-                        <FolderIcon className="size-4 mr-2" />
-                        <SelectValue placeholder="프로젝트" />
-                    </div>
-                </SelectTrigger>
-                <SelectContent>
-                    <SelectItem value="all"> 프로젝트</SelectItem>
-                    <SelectSeparator /> 
-                    {projectOptions?.map((project) => (
-                        <SelectItem key={project.value} value={project.value}>
-                            {project.label}
-                        </SelectItem>
-                    ))}
-                </SelectContent>
-            </Select>
+            {!hideProjectFilter && (
+                <Select
+                    defaultValue={projectId ?? undefined}
+                    onValueChange={(value) => onProjectChange(value)}
+                >
+                    <SelectTrigger className="w-full lg:w-auto h-8">
+                        <div className="flex items-center pr-2">
+                            <FolderIcon className="size-4 mr-2" />
+                            <SelectValue placeholder="프로젝트" />
+                        </div>
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectItem value="all"> 프로젝트</SelectItem>
+                        <SelectSeparator /> 
+                        {projectOptions?.map((project) => (
+                            <SelectItem key={project.value} value={project.value}>
+                                {project.label}
+                            </SelectItem>
+                        ))}
+                    </SelectContent>
+                </Select>
+            )}
 
             <DatePicker
                 placeholder="기한 날짜"
