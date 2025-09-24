@@ -33,7 +33,7 @@ const TaskDescription = ({ task }: TaskDescriptionProps) => {
     return (
         <div className="p-4 border rounded-lg">
             <div className="flex items-center justify-between">
-                <p className="text-lg font-medium">개요</p>
+                <p className="text-lg font-medium">설명</p>
                 <Button 
                     onClick={() => setIsEditing((prev) => !prev)}
                     size={"sm"}

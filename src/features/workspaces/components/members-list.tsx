@@ -12,11 +12,11 @@ import { MemberAvatar } from "@/features/members/components/member-avatar";
 import { useUpdateMember } from "@/features/members/api/use-update-member";
 
 import { Button } from "@/components/ui/button";
+import { useConfirm } from "@/hooks/use-confirm";
 import { Separator } from "@/components/ui/separator";
 import { DottedSeparator } from "@/components/dotted-separator";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { useConfirm } from "@/hooks/use-confirm";
 
 
 export const MembersList = () => {

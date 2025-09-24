@@ -76,10 +76,6 @@ export const EditProjectForm = ({ onCancel, initialValues }: EditProjectFormPros
         mutate({ 
             form: finalValues,
             param: { projectId: initialValues.$id }
-        }, {
-            onSuccess: () => {
-                form.reset();
-            }
         });
     };
 
