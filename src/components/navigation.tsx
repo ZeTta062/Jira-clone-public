@@ -23,7 +23,7 @@ const routes = [
         activeIcon: GoHomeFill,
     },
     {
-        label: "My Tasks",
+        label: "내 작업",
         href: "/tasks",
         icon: GoCheckCircle,
         activeIcon: GoCheckCircleFill,
