@@ -2,7 +2,6 @@
 
 import { z } from "zod";
 import { Resolver, useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { cn } from "@/lib/utils";
@@ -11,7 +10,6 @@ import { Button } from "@/components/ui/button";
 import DatePicker from "@/components/date-picker";
 import { DottedSeparator } from "@/components/dotted-separator";
 import { ProjectAvatar } from "@/features/projects/components/project-avatar";
-import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { MemberAvatar } from "@/features/members/components/member-avatar";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -34,7 +32,6 @@ const createTaskFormSchema = createTaskSchema.omit({ workspaceId: true, descript
 type CreateTaskFormValues = z.infer<typeof createTaskFormSchema>;
 
 export const EditTaskForm = ({ onCancel, projectOptions, memberOptions, initialValues }: EditTaskFormPros) => {
-    const router = useRouter();
     const { mutate, isPending } = useUpdateTask();
 
     const form = useForm<CreateTaskFormValues>({

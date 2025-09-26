@@ -2,7 +2,6 @@
 
 import { z } from "zod";
 import { useRef } from "react";
-import { toast } from "sonner";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
@@ -236,7 +235,7 @@ export const EditProjectForm = ({ onCancel, initialValues }: EditProjectFormPros
 							size={"default"}
 							variant={"destructive"}
 							type="button"
-							disabled={isPending}
+							disabled={isPending || isDeletingProject}
 							onClick={handleDelete}
 						>
 							프로젝트 삭제

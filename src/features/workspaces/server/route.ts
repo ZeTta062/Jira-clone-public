@@ -215,7 +215,6 @@ const app = new Hono()
         sessionMiddleware,
         async (c) => {
             const databases = c.get("databases");
-            const user = c.get("user");
 
             const { workspaceId } = c.req.param();
 

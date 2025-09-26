@@ -15,6 +15,7 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from "@/component
 
 import { registerSchema } from "../schemas"
 import { useRegister } from "../api/use-register"
+import { signUpWithGithub, signUpWithGoogle } from "@/lib/oauth";
 
 
 export const SignUpCard = () => {
@@ -120,6 +121,7 @@ export const SignUpCard = () => {
                     size={"lg"}
                     className="w-full"
                     disabled={isPending}
+                    onClick={() => signUpWithGoogle()}
                 >
                     <FcGoogle className="mr-2 size-5" />
                     구글로 로그인
@@ -129,6 +131,7 @@ export const SignUpCard = () => {
                     size={"lg"}
                     className="w-full"
                     disabled={isPending}
+                    onClick={() => signUpWithGithub()}
                 >
                     <FaGithub className="mr-2 size-5" />
                     깃허브로 로그인

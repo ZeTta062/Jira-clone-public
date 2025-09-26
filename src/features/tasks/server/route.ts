@@ -11,7 +11,6 @@ import { getMember } from "@/features/members/utils";
 
 import { Task, TaskStatus } from "../types";
 import { createTaskSchema } from "../schemas";
-import { StrikethroughIcon } from "lucide-react";
 
 const app = new Hono()
     .delete(
@@ -141,7 +140,7 @@ const app = new Hono()
 
                     return {
                         ...member,
-                        name: user.name,
+                        name: user.name || user.email,
                         email: user.email,
                     }
                 })
@@ -322,7 +321,7 @@ const app = new Hono()
 
             const assignee = {
                 ...member,
-                name: user.name,
+                name: user.name || user.email,
                 email: user.email
             };
 

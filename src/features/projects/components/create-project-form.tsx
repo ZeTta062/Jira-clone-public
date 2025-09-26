@@ -25,6 +25,7 @@ interface CreateProjectFormPros {
     onCancel?: () => void;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const formSchema = createProjectSchema.omit({ workspaceId: true });
 type FormValues = z.infer<typeof formSchema>;
 

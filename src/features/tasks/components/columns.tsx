@@ -62,7 +62,7 @@ export const columns: ColumnDef<Task>[] = [
                 </div>
             )
         },
-        sortingFn: (rowA, rowB, columnId) => {
+        sortingFn: (rowA, rowB) => {
             const nameA = rowA.original.project?.name || '';
             const nameB = rowB.original.project?.name || '';
             return nameA.localeCompare(nameB);
@@ -96,7 +96,7 @@ export const columns: ColumnDef<Task>[] = [
                 </div>
             )
         },
-        sortingFn: (rowA, rowB, columnId) => {
+        sortingFn: (rowA, rowB) => {
             const nameA = rowA.original.assignee?.name || '';
             const nameB = rowB.original.assignee?.name || '';
             return nameA.localeCompare(nameB);

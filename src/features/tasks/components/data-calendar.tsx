@@ -4,13 +4,14 @@ import { CalendarIcon, ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Calendar, dateFnsLocalizer } from "react-big-calendar";
-import { format, getDay, parse, startOfWeek, addMonths, subMonths } from "date-fns";
+import { format, getDay, parse, startOfWeek, subMonths } from "date-fns";
 
 import { Task } from "../types";
 import EventCard from "./event-card";
 
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./data-calendar.css";
+import { Member } from "@/features/members/types";
 
 
 const locales = {
@@ -110,7 +111,7 @@ export const DataCalendar = ({ data }: DataCalendarProps) => {
                     <EventCard 
                         id={event.id}
                         title={event.title}
-                        assignee={event.assignee}
+                        assignee={event.assignee as Member}
                         project={event.project}
                         status={event.status}
                     />

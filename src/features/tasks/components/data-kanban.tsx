@@ -151,7 +151,7 @@ const DataKanban = ({
         });
 
         onChange(updatesPayload);
-    }, []);
+    }, [onChange]);
 
     return (
         <DragDropContext onDragEnd={onDragEnd}>

@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
 
 import { Project } from "@/features/projects/types";
+import { Member } from "@/features/members/types";
 import { ProjectAvatar } from "@/features/projects/components/project-avatar";
 import { useWorkspaceId } from "@/features/workspaces/hooks/use-workspace-id";
 import { MemberAvatar } from "@/features/members/components/member-avatar";
@@ -11,7 +12,7 @@ import { TaskStatus } from "../types";
 
 interface EventCardProps {
     title: string;
-    assignee: any;
+    assignee?: Member;
     project?: Project;
     status: TaskStatus;
     id: string;
@@ -55,7 +56,7 @@ const EventCard = ({
                 <p>{title}</p>
                 <div className="flex items-center gap-x-1">
                     <MemberAvatar 
-                        name={assignee?.name}
+                        name={assignee?.name || ""}
                     />
                     <div className="size-1 rounded-full bg-neutral-300" />
                     <ProjectAvatar 
