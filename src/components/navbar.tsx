@@ -1,5 +1,7 @@
+import Link from "next/link";
 import { MobileSidebar } from "./mobile-sidebar";
 import UserButton from "@/features/auth/components/user-button";
+import Image from "next/image";
 
 export const Navbar = () => {
     return (
@@ -11,6 +13,11 @@ export const Navbar = () => {
                     </p>
             </div>
             <MobileSidebar />
+            <div className="flex lg:hidden">
+                <Link href={"/"}>
+                    <Image src={"/logo.svg"} alt="로고" width={164} height={48} />
+                </Link>
+            </div>
             <UserButton />
         </nav>
     );
