@@ -30,6 +30,8 @@ export const useDeleteTask = () => {
 
             queryClient.invalidateQueries({ queryKey: ["tasks"] });
             queryClient.invalidateQueries({ queryKey: ["task", data.$id] });
+            queryClient.invalidateQueries({ queryKey: ["project-analytics"] });
+            queryClient.invalidateQueries({ queryKey: ["workspace-analytics"] });
         },
         onError: () => {
             toast.error("작업을 삭제하는데 실패하였습니다.")

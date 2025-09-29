@@ -29,8 +29,7 @@ export const useLogout = () => {
         onSuccess: () => {
             toast.success("로그아웃에 성공하였습니다.")
             router.refresh();
-            queryClient.invalidateQueries({ queryKey: ["current"] });
-            queryClient.invalidateQueries({ queryKey: ["workspaces"] });
+            queryClient.invalidateQueries();
         },
         onError: () => {
             toast.error("로그아웃에 실패하였습니다.")

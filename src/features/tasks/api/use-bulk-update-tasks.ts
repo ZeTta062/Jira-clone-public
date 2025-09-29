@@ -28,7 +28,8 @@ export const useBulkUpdateTasks = () => {
             toast.success("작업목록을 수정했습니다.");
 
             queryClient.invalidateQueries({ queryKey: ["tasks"] });
-
+            queryClient.invalidateQueries({ queryKey: ["project-analytics"] });
+            queryClient.invalidateQueries({ queryKey: ["workspace-analytics"] });
         },
         onError: () => {
             toast.error("작업목록을 수정하는데 실패하였습니다.")
