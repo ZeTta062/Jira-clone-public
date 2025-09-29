@@ -1,27 +1,49 @@
-# Jira Clone
+# Jira 클론 프로젝트
 
-##  Use Stack
+이 프로젝트는 인기 있는 프로젝트 관리 도구인 Jira를 클론 코딩하여 만든 웹 애플리케이션입니다. 
+Next.js, TypeScript, Appwrite 등 최신 웹 기술을 사용하여 개발되었습니다.
 
-- npx create-next-app@latest
-- npx shadcn@latest init
-- npx shadcn@latest add --all
-- npm i react-icons
-- npm i hono@latest
-- npm i @tanstack/react-query@latest
-- npm i @hono/zod-validator
-- npm i node-appwrite@latest
-- npm i server-only
-- npm install @radix-ui/react-visually-hidden(개인적으로 추가한 sheet title 부분 에러 해결 방법)
-- npm i react-use
-- npm i nuqs
-- npm i date-fns
-- npm i @hello-pangea/dnd
-- npm i react-big-calendar
-- npm i -D @types/react-big-calendar
 
-## 수정해야할 점
-- appwrite는 Image transformations를 free tier에서 제공하지 않음.
-따라서 getFilePreview를 사용할 수 없음
-+ 우회방법으로 base64프리뷰를 사용하지 않고, 이미지 자체를 가져옴.
-+ storage 설정에서 Permissons에 Read Any 설정함.
-- "nuqs": "^2.5.0"를 사용하는데, 이 버전은 app/layout.tsx에 NuqsAdapter컴포넌틑를 넣어야한다.
+## 주요 기능
+
+이 Jira 클론은 전문적인 프로젝트 관리 플랫폼에서 기대할 수 있는 다양한 기능을 구현합니다.
+
+**대시보드 및 작업 관리**:
+- **내 작업 페이지**: 테이블, 칸반 보드, 캘린더 등 다양한 형식으로 작업을 시각화합니다.
+- **드래그 앤 드롭**: 칸반 보드에서 작업을 쉽게 드래그하여 상태를 변경할 수 있습니다 .
+- **작업 상세 페이지**: 작업 설명 수정, 담당자 변경, 프로젝트 이동, 상태 업데이트 및 작업 삭제(확인 모달 포함)가 가능합니다.
+- **작업 생성 및 필터링**: 상세 정보(이름, 기한 일자, 담당자, 상태, 프로젝트)를 포함한 작업을 생성하고, 담당자 등 여러 기준으로 작업을 필터링할 수 있습니다.
+
+**프로젝트 및 작업 공간 관리**:
+- **프로젝트 페이지**: 각 프로젝트별 분석 및 설정 기능을 제공하며, 프로젝트 생성, 편집, 관리가 가능합니다.
+- **워크스페이스 설정**: 작업 공간의 이름을 변경하고 커스텀 이미지를 업로드할 수 있습니다.
+- **워크스페이스 전환**: 여러 작업 공간을 쉽게 탐색할 수 있는 스위처 기능을 제공합니다.
+
+**사용자 및 접근 관리**:
+- **멤버 페이지**: 작업 공간의 모든 멤버를 확인하고 역할을 관리(게스트, 관리자)할 수 있습니다.
+- **역할 기반 접근 제어**: 멤버를 관리자로 승격하거나 작업 공간에서 제거하는 등 역할에 따른 접근 제어를 구현합니다.
+- **초대 시스템**: 공유 가능한 링크를 통해 새로운 멤버를 쉽게 초대할 수 있습니다.
+
+**사용자 인증**:
+- **회원가입 및 로그인**: 사용자는 이메일과 비밀번호를 통해 계정을 생성하고 로그인할 수 있습니다. 
+또한, GitHub 및 Google 계정을 이용한 OAuth 소셜 로그인을 지원하여 간편하게 인증할 수 있습니다.
+- **인증 기반 라우팅**: 로그인하지 않은 사용자가 인증이 필요한 페이지(예: 대시보드)에 접근할 경우, 자동으로 로그인 페이지로 리디렉션(redirection)하여 접근을 제어합니다.
+- **세션 관리**: 로그인 시 서버는 쿠키를 통해 세션을 생성 및 관리하여 사용자의 인증 상태를 유지합니다. 
+로그아웃 시에는 관련 쿠키를 삭제하여 세션을 안전하게 종료합니다.
+
+## 사용된 기술 스택
+
+이 프로젝트는 다음과 같은 최신 웹 기술을 사용하여 구축되었습니다.
+
+- 프레임워크: Next.js15
+- 런타임: Node.js
+- UI 라이브러리: React 18, Tailwind CSS, Shadcn/UI
+- 상태 관리: TanStack Query (React Query) v5
+- 폼 관리: React Hook Form, Zod
+- 백엔드 API: Hono.js
+- 백엔드 서비스: Appwrite
+- 기타: TypeScript, ESLint
+
+  ## 라이선스
+
+  이 프로젝트는 MIT 라이선스 (LICENSE)를 따릅니다.
