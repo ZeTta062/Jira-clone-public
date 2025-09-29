@@ -48,3 +48,25 @@
 .rbc-off-range-bg {
     background: inherit;
 } */
+
+/* 📱 모바일 대응 */
+@media (max-width: 768px) {
+    .rbc-month-view {
+      min-height: 450px;
+    }
+  
+    .rbc-month-row {
+      min-height: 120px;
+    }
+  
+    .rbc-event {
+      font-size: 10px;
+      padding: 1px 2px;
+    }
+  
+    /* 요일 헤더도 줄이기 */
+    .rbc-header {
+      font-size: 11px;
+      padding: 2px;
+    }
+  }
