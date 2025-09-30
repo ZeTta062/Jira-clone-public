@@ -199,6 +199,7 @@ const app = new Hono()
         async (c) => {
             const databases = c.get("databases");
             const user = c.get("user");
+            const storage = c.get("storage");
 
             const { projectId } = c.req.param();
 
@@ -233,6 +234,20 @@ const app = new Hono()
                         task.$id
                     )
                 )))
+            }
+
+            if (existingProject.imageUrl) {
+                try {
+                    const fileId = existingProject.imageUrl.split("/files/")[1].split("/")[0];
+
+                    await storage.deleteFile(
+                        IMAGES_BUCKET_ID,
+                        fileId,
+                    )
+                }
+                catch {
+                    console.log("이미지 파일 없음")
+                }
             }
 
             await databases.deleteDocument(

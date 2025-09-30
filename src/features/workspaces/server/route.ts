@@ -187,8 +187,19 @@ const app = new Hono()
         async (c) => {
             const databases = c.get("databases");
             const user = c.get("user");
+            const storage = c.get("storage");
 
             const { workspaceId } = c.req.param();
+
+            const workspace = await databases.getDocument<Workspace>(
+                DATABASE_ID,
+                WORKSPACES_ID,
+                workspaceId
+            );
+
+            if (!workspace) {
+                return c.json({ error: "Workspace not found"}, 404);
+            }
 
             const member = await getMember({
                 databases,
@@ -249,6 +260,20 @@ const app = new Hono()
                         member.$id
                     )
                 )))
+            }
+
+            if (workspace.imageUrl) {
+                try {
+                    const fileId = workspace.imageUrl.split("/files/")[1].split("/")[0];
+
+                    await storage.deleteFile(
+                        IMAGES_BUCKET_ID,
+                        fileId,
+                    )
+                }
+                catch {
+                    console.log("이미지 파일 없음")
+                }
             }
 
             await databases.deleteDocument(
