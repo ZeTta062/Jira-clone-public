@@ -49,23 +49,19 @@ const EventCard = ({
             <div 
                 onClick={onClick}
                 className={cn(
-                    "min-w-8 p-1.5 text-xs bg-white text-primary border rounded-md border-l-4 flex flex-col gap-y-1.5 cursor-pointer hover:opacity-75 transition",
+                    "p-1.5 text-xs bg-white text-primary border rounded-md border-l-2 md:border-l-4 flex flex-col gap-y-1.5 cursor-pointer hover:opacity-75 transition",
                     statusColorMap[status]
                 )}
             >
-                <p className="truncate text-[8px] md:text-xs font-medium">{title}</p>
-                <div className="grid items-center gap-x-1 grid-cols-1 md:grid-cols-3">
+                <p className="text-[8px] md:text-xs font-medium line-clamp-3 break-words">{title}</p>
+                <div className="items-center gap-x-1 hidden md:flex">
                     <MemberAvatar 
                         name={assignee?.name || ""}
-                        className="size-3 md:size-5 mb-2 md:mb-0"
                     />
-                    <div className="w-full justify-center hidden md:flex">
-                        <div className="size-1 rounded-full bg-neutral-300" />
-                    </div>
+                    <div className="size-1 rounded-full bg-neutral-300" />
                     <ProjectAvatar 
                         name={project?.name || ""}
                         image={project?.imageUrl}
-                        className="size-3 md:size-5"
                     />
                 </div>
             </div>
