@@ -5,14 +5,15 @@ import { zValidator } from "@hono/zod-validator";
 
 import { generateInviteCode } from "@/lib/utils";
 import { sessionMiddleware } from "@/lib/session-middleware";
-import { DATABASE_ID, IMAGES_BUCKET_ID, MEMBERS_ID, TASKS_ID, WORKSPACES_ID } from "@/config";
+import { DATABASE_ID, IMAGES_BUCKET_ID, MEMBERS_ID, PROJECTS_ID, TASKS_ID, WORKSPACES_ID } from "@/config";
 
 import { createWorkspaceSchema, updateWorkspaceSchema } from "../schemas";
 import { MemberRole } from "@/features/members/types";
 import { getMember } from "@/features/members/utils";
 import { Workspace } from "../types";
 import { endOfMonth, startOfMonth, subMonths } from "date-fns";
-import { TaskStatus } from "@/features/tasks/types";
+import { Task, TaskStatus } from "@/features/tasks/types";
+import { Project } from "@/features/projects/types";
 
 const app = new Hono()
     .get("/", sessionMiddleware, async (c) => {
@@ -200,6 +201,55 @@ const app = new Hono()
             }
 
             // Todo: Delete members, projects, and task
+            const projects = await databases.listDocuments<Project>(
+                DATABASE_ID,
+                PROJECTS_ID,
+                [Query.equal("workspaceId", workspaceId)],
+            );
+
+            if (projects.total > 0) {
+                await Promise.all(projects.documents.map(async (project) => {
+                    const tasks = await databases.listDocuments<Task> (
+                        DATABASE_ID,
+                        TASKS_ID,
+                        [Query.equal("projectId", project.$id)]
+                    );
+
+                    if (tasks.total > 0) {
+                        await Promise.all(tasks.documents.map((task) => (
+                            databases.deleteDocument(
+                                DATABASE_ID,
+                                TASKS_ID,
+                                task.$id
+                            )
+                        )))
+                    }
+                }))
+
+                await Promise.all(projects.documents.map((project) => (
+                    databases.deleteDocument(
+                        DATABASE_ID,
+                        PROJECTS_ID,
+                        project.$id
+                    )
+                )));
+            }
+
+            const members = await databases.listDocuments(
+                DATABASE_ID,
+                MEMBERS_ID,
+                [Query.equal("workspaceId", workspaceId)]
+            );
+
+            if (members.total > 0) {
+                await Promise.all(members.documents.map((member) => (
+                    databases.deleteDocument(
+                        DATABASE_ID,
+                        MEMBERS_ID,
+                        member.$id
+                    )
+                )))
+            }
 
             await databases.deleteDocument(
                 DATABASE_ID,

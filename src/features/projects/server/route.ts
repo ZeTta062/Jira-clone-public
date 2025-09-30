@@ -219,6 +219,21 @@ const app = new Hono()
             }
 
             // Todo: Delete task
+            const tasks = await databases.listDocuments(
+                DATABASE_ID,
+                TASKS_ID,
+                [Query.equal("projectId", projectId)]
+            );
+
+            if (tasks.total > 0) {
+                await Promise.all(tasks.documents.map((task) => (
+                    databases.deleteDocument(
+                        DATABASE_ID,
+                        TASKS_ID,
+                        task.$id
+                    )
+                )))
+            }
 
             await databases.deleteDocument(
                 DATABASE_ID,
