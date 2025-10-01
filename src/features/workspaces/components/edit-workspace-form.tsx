@@ -249,7 +249,7 @@ export const EditWorkspaceForm = ({ onCancel, initialValues }: EditWorkspaceForm
                 </CardContent>
             </Card>
 
-            <Card className="w-full h-full border-none shadow-none">
+            <Card className="w-full h-full border-none shadow-none" id="invite">
                 <CardContent className="p-7" >
 					<div className="flex flex-col">
 						<h3 className="font-bold">팀 초대</h3>

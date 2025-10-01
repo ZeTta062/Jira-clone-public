@@ -245,6 +245,25 @@ export const MemberList = ({
                     <li className="col-span-full text-sm text-muted-foreground text-center hidden first-of-type:block">
                         팀을 찾을 수 없습니다.
                     </li>
+                    <li className="">
+                        <Link href={`/workspaces/${workspaceId}/settings#invite`}>
+                            <Card className="shadow-none rounded-lg hover:opacity-75 transition">
+                                <CardContent className="p-3 flex flex-col items-center gap-x-2">
+                                    <div className="flex justify-center items-center bg-neutral-200 size-12 rounded-full">
+                                        <PlusIcon className="text-neutral-500" />
+                                    </div>
+                                    <div className="flex flex-col items-center overflow-hidden">
+                                        <p className="text-lg font-medium line-clamp-1">
+                                            멤버 추가하기
+                                        </p>
+                                        <p className="text-sm text-muted-foreground line-clamp-1">
+                                            링크로 멤버 초대하기
+                                        </p>
+                                    </div>
+                                </CardContent>
+                            </Card>
+                        </Link>
+                    </li>
                 </ul>
             </div>
         </div>

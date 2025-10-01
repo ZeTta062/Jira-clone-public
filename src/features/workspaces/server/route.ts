@@ -211,7 +211,7 @@ const app = new Hono()
                 return c.json({ error: "Unauthorized"}, 401)
             }
 
-            // Todo: Delete members, projects, and task
+            // Delete members, projects, and task
             const projects = await databases.listDocuments<Project>(
                 DATABASE_ID,
                 PROJECTS_ID,

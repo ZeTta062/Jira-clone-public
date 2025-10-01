@@ -3,6 +3,9 @@
 이 프로젝트는 인기 있는 프로젝트 관리 도구인 Jira를 클론 코딩하여 만든 웹 애플리케이션입니다. 
 Next.js, TypeScript, Appwrite 등 최신 웹 기술을 사용하여 개발되었습니다.
 
+## 사이트 링크
+- https://jira-clone-public.vercel.app
+
 
 ## 주요 기능
 
