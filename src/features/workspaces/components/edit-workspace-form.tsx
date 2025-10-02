@@ -1,13 +1,13 @@
 "use client";
 
 import { z } from "zod";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ArrowLeftIcon, CopyIcon, ImageIcon } from "lucide-react";
+import { ArrowLeftIcon, CopyCheckIcon, CopyIcon, ImageIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
@@ -31,6 +31,9 @@ interface EditWorkspaceFormPros {
 
 export const EditWorkspaceForm = ({ onCancel, initialValues }: EditWorkspaceFormPros) => {
     const router = useRouter();
+
+    const [isCopied, setIsCopied] = useState(false);
+
     const { mutate, isPending } = useUpdateWorkspace();
 	const { 
 		mutate: deleteWorkspace, 
@@ -108,9 +111,37 @@ export const EditWorkspaceForm = ({ onCancel, initialValues }: EditWorkspaceForm
     const fullInviteLink = `${process.env.NEXT_PUBLIC_APP_URL}/workspaces/${initialValues.$id}/join/${initialValues.inviteCode}`;
 
     const handleCopyInviteLink = () => {
-        navigator.clipboard.writeText(fullInviteLink)
-            .then(() => toast.success("초대 링크가 클립보드에 복사되었습니다."))
+        try {
+            navigator.clipboard.writeText(fullInviteLink)
+            setIsCopied(true);
+            toast.success("초대 링크가 클립보드에 복사되었습니다.");
+
+            setTimeout(() => {
+                setIsCopied(false);
+            }, 2000);
+        }
+        catch {
+            toast.error("클립보드 복사에 실패했습니다.");
+        }
     }
+
+    const pathname = usePathname();
+    useEffect(() => {
+        if (window.location.hash) {
+            const id = window.location.hash.replace("#", "");
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: "smooth" });
+
+                // 깜빡임 효과 추가
+                element.classList.add("animate-highlight");
+                // 애니메이션 끝나면 제거해서 다음에도 실행 가능
+                setTimeout(() => {
+                element.classList.remove("animate-highlight");
+                }, 1200); // blink duration(0.6s) * 반복(2) = 1.2
+            }
+        }
+        }, []);
 
     return (
         <div className="flex flex-col gap-y-4">
@@ -260,11 +291,12 @@ export const EditWorkspaceForm = ({ onCancel, initialValues }: EditWorkspaceForm
                             <div className="flex items-center gap-x-2">
                                 <Input disabled value={fullInviteLink} />
                                 <Button
+                                    disabled={isCopied}
                                     onClick={handleCopyInviteLink}
                                     variant={"secondary"}
                                     className="size-12 cursor-pointer"
                                 >
-                                    <CopyIcon className="size-5" />
+                                    {isCopied ?  <CopyCheckIcon className="size-5" /> : <CopyIcon className="size-5" /> }
                                 </Button>
                             </div>
                         </div>

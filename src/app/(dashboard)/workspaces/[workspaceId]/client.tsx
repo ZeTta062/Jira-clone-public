@@ -254,10 +254,10 @@ export const MemberList = ({
                                     </div>
                                     <div className="flex flex-col items-center overflow-hidden">
                                         <p className="text-lg font-medium line-clamp-1">
-                                            멤버 추가하기
+                                            팀원 추가
                                         </p>
                                         <p className="text-sm text-muted-foreground line-clamp-1">
-                                            링크로 멤버 초대하기
+                                            링크를 사용하여 추가하기
                                         </p>
                                     </div>
                                 </CardContent>
